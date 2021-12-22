@@ -87,8 +87,6 @@ The distribution of the difference between two similarity scores (output and end
 ![Image of baseline](https://github.com/xiaowanzio8/NLP-Story-Ending-Prediction-with-T5/blob/main/images/baseline.jpg)
 
 For the baseline model, we used the pretrained text-to-text T5-base. Our model architecture was built on PyTorch-lightning and Transformers. For the ROC story dataset, we formatted the model input as a small paragraph, which concatenated the first 4 sentences and the corresponding output as the 5th sentence. We then further breakdown sentences into tokens and then we pad all the sentences to the same length, which is 256.  We passed the tokens into the base model, through back propagation, our loss kept decreasing. In the end, we output the prediction of sentence 5 to compare with the target sentence. 
-![image](https://user-images.githubusercontent.com/59941969/147163994-8878d081-3b90-4ff8-8f17-a90addc14741.png)
-
 
 
 ## Experiments
@@ -97,7 +95,7 @@ For the baseline model, we used the pretrained text-to-text T5-base. Our model a
 
 We fine-tuned our models in AWS by creating a G-2xlarge instance with Nvidia deep learning AMI and conducted limited parameter tuning (batch size: 8,16; learning rate: 1e-4, 1e-5, 5e-4; precision: 16, 32) to find the model that had the best performance. We used AdamW optimizer to adjust weight decay and learning rate separately. 
 
-Firstly, we fine-tuned a pre-trained T5-small model on the ROCstories dataset. We studied some recent research papers. In addition to the T5-small model, we experimented with the T5-base model since the training dataset size is over 50,000. The T5-base model has 220 million parameters, which could understand the sentence complexity better. See Appendix \ref{sec:appendix D} for the prediction result examples from T5-base and T5-small models.
+Firstly, we fine-tuned a pre-trained T5-small model on the ROCstories dataset. We studied some recent research papers. In addition to the T5-small model, we experimented with the T5-base model since the training dataset size is over 50,000. The T5-base model has 220 million parameters, which could understand the sentence complexity better. 
 
 In our baseline model, we only generated one ending for each story. In fact, one story could have many possible endings. In order to add some variance to the final output, we tried to generate 5 outputs for each story by setting Number of Return Sequence = 5 &  Beam Size = 10. 
 
